@@ -1,3 +1,5 @@
+package Talleres.Taller01.Ejercicio01;
+
 public class TestThermometer {
     public static void main(String[] args) {
         System.out.print("\n|||THERMOMETER TEST|||\n");
