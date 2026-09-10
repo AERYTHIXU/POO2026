@@ -6,7 +6,7 @@ public class Thermometer {
             this.temperature = initialTemperature;
         }
         else {
-            this.temperature = 0;
+            this.temperature = 0; // Valid default value.
         }
     }
 
