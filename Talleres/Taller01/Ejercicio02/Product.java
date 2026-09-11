@@ -10,19 +10,19 @@ public class Product {
         if (name != null && !name.trim().isEmpty()) {
             this.name = name.trim();
         } else {
-            this.name = "Unknown"; // Valid default String.
+            this.name = "Unknown"; // Valid default name.
         }
 
         if (price > 0) {
             this.price = price;
         } else {
-            this.price = 0; // Valid default value.
+            this.price = 0; // Valid default price.
         }
 
         if (stock > 0) {
             this.stock = stock;
         } else {
-            this.stock = 0; // Valid default value.
+            this.stock = 0; // Valid default .
         }
     }
 
@@ -31,8 +31,8 @@ public class Product {
     }
     public boolean setName(String name) {
         if (name != null && !name.trim().isEmpty()) {
-        this.name = name;
-        return true;
+            this.name = name;
+            return true;
         }
         return false;
     }
@@ -42,8 +42,8 @@ public class Product {
     }
     public boolean setPrice(double price) {
         if (price > 0) {
-        this.price = price;
-        return true;
+            this.price = price;
+            return true;
         }
         return false;
     }
