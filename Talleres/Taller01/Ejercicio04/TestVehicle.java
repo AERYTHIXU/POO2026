@@ -28,53 +28,63 @@ public class TestVehicle {
     
     System.out.println(String.format("Action: %s = Went from %d to %d km/h", 
     action.toUpperCase(), previousSpeed, vehicle.getCurrentSpeed()));
-}
+    }
+
+    // Loop to check string values.
+    public static void runTest(Vehicle vehicle, String title, String[] values, String stringType) {
+        System.out.println("\n|| BRAND TESTS ||\n");
+        for (String brand : values) {
+            boolean accepted = vehicle.setBrand(brand);
+            String assesment = evaluateChange(accepted, stringType, brand, vehicle.getBrand());
+            System.out.println(assesment);
+        }
+    }
+    
+    // Loop to check int values.
+    public static void runTest(Vehicle myVehicle, String title, int[] values, String speedType) {
+        System.out.println("\n|| " + title + " ||\n");
+        for (int value : values) {
+            boolean accepted;
+            Object actual;
+            
+            if (speedType.equals("Current")) {
+                accepted = myVehicle.setCurrentSpeed(value);
+                actual = myVehicle.getCurrentSpeed();
+            } else {
+                accepted = myVehicle.setMaximumSpeed(value);
+                actual = myVehicle.getMaximumSpeed();
+            }
+            
+            String assessment = evaluateChange(accepted, speedType + " Speed", value, actual);
+            System.out.println(assessment);
+        }
+    }
 
     public static void main(String[] args) {
+        int maximumSpeed = 190;
         System.out.println("\n||| VEHICLE TEST |||\n");
-        Vehicle myVehicle = new Vehicle("Mercedes", "AEI-958",  190);
+        Vehicle myVehicle = new Vehicle("Mercedes", "AEI-958",  maximumSpeed);
 
-        //Loop to check brands.
         String[] brands = {"", "  ", "Ferrari", "BMW", "Toyota"};
-        System.out.println("\n|| BRAND TESTS ||\n");
-        for (String brand : brands) {
-            boolean accepted = myVehicle.setBrand(brand);
-            String assesment = evaluateChange(accepted, "Brand", brand, myVehicle.getBrand());
-            System.out.println(assesment);
-        }
+        runTest(myVehicle, "BRANDS TEST", brands, "Brand");
 
-        //Loop to check current speeds.
-        System.out.println("\n|| CURRENT SPEED TESTS ||\n");
-        int[] currentSpeeds = {-10, 20, 150, 210, 34, 22};
-        for (int speed : currentSpeeds) {
-            boolean accepted = myVehicle.setCurrentSpeed(speed);
-            String assesment = evaluateChange(accepted, "Current Speed", speed, myVehicle.getCurrentSpeed());
-            System.out.println(assesment);
-        }
-
-        //Loop to check maximum speeds.
-        System.out.println("\n|| MAXIMUM SPEED TESTS ||\n");       
+        int[] currentSpeeds = {-50, 45, 39, 125, 5000, 61312};
+        runTest(myVehicle, "CURRENT SPEEDS TEST", currentSpeeds, "Current");
 
         int[] maximumSpeeds = {-20, 0, 80, 120, -1, 1};
-        for (int maximumSpeed : maximumSpeeds) {
-            boolean accepted = myVehicle.setMaximumSpeed(maximumSpeed);
-            String assesment = evaluateChange(accepted, "Maximum Speed", maximumSpeed, myVehicle.getMaximumSpeed());
-            System.out.println(assesment);
-        }
+        runTest(myVehicle, "MAXIMUM SPEED TEST", maximumSpeeds, "Maximum");
 
-        System.out.println("\n|| LICENSE PLATE TESTS ||\n");
         String[] plates = {"abc123", "XYZ789", "invalid", "DEF456", "ASDFAS123"};
-
+        System.out.println("\n||| LICENSE PLATES TEST |||\n");
         for (String plate : plates) {
             String resultMessage = validateLicensePlates(myVehicle, plate);
-            System.out.println(String.format("Trying plate '%s' = %s Current plate: %s", 
-            plate, resultMessage, myVehicle.getLicensePlate()));
+            System.out.printf("Trying plate %s = %s Actual plate = %s%n", plate, resultMessage, myVehicle.getLicensePlate());
         }
 
         myVehicle.setCurrentSpeed(0);
-        System.out.println("\n|| ACTION TESTS ||\n");
+        myVehicle.setMaximumSpeed(maximumSpeed);
         String[] actions = {"accelerate", "accelerate", "accelerate", "brake", "brake", "brake"};
-
+        System.out.println("\n||| ACTIONS TEST |||\n");
         for (String action : actions) {
             testAction(myVehicle, action);
         }

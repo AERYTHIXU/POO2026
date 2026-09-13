@@ -10,7 +10,7 @@ public class Vehicle {
     public Vehicle(String brand, String licensePlate, int maximumSpeed) {
     
         this.brand = (brand != null && !brand.trim().isEmpty()) ? brand.trim() : "Unknown";
-        this.licensePlate = (licensePlate != null && licensePlate.trim().matches("((?i)^[a-zA-Z]{3}[0-9]{3}$"))
+        this.licensePlate = (licensePlate != null && licensePlate.trim().matches("(?i)^[a-zA-Z]{3}[0-9]{3}$"))
         ? licensePlate.trim().toUpperCase() : "AAA000";
         this.maximumSpeed = (maximumSpeed >= 0) ? maximumSpeed : 0;
         this.currentSpeed = 0;
