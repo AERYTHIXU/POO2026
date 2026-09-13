@@ -1,6 +1,8 @@
 package Talleres.Taller01.Ejercicio08;
 
 public class TestElectronicWallet {
+    //Creation of the record (I found out about this class while I was doing the workshop).
+    private record WalletFuntionsTest(String action, int amount) {};
     private static String evaluatePayment(ElectronicWallet electronicWallet, int amount) {
         PaymentStatus status = electronicWallet.payment(amount);
         String evaluationMessage = switch(status) {
@@ -22,7 +24,7 @@ public class TestElectronicWallet {
             boolean accepted = true;
             String actual = "";
 
-            if (stringType.matches("Owner")) {
+            if (stringType.equalsIgnoreCase("Owner")) {
                 accepted = electronicWallet.setOwner(value);
                 actual = electronicWallet.getOwner();
             }
@@ -38,16 +40,24 @@ public class TestElectronicWallet {
         String[] owner = {"", " ", "Juan", "Pedro", "Camilo"};
         runTest(myElectronicWallet, "OWNERS TEST", owner, "Owner");
 
-        String[] actions = {"Payment", "Top-up", "Top-up", "Top-up", "Payment", "Payment", "Payment", "Payment"};
-        int[] amounts = {-20000, -127500, 25000, 756550, 650000, 500000, 300000, -1500000};
+        WalletFuntionsTest[] tests = {
+            new WalletFuntionsTest("Payment", -20000),
+            new WalletFuntionsTest("Top-up", -127500),
+            new WalletFuntionsTest("Top-up", 25000),
+            new WalletFuntionsTest("Top-up", 756550),
+            new WalletFuntionsTest("Payment", 650000),
+            new WalletFuntionsTest("Payment", 500000),
+            new WalletFuntionsTest("Payment", 300000),
+            new WalletFuntionsTest("Payment", -1500000)
+        };
         System.out.println("\n|| ACTIONS TEST ||\n");
-        for (int i = 0; i < amounts.length; i++) {
-            if (actions[i].matches("Payment")) {
-                String resultMessage = evaluatePayment(myElectronicWallet, amounts[i]);
+        for (WalletFuntionsTest test : tests) {
+            if (test.action.equalsIgnoreCase("Payment")) {
+                String resultMessage = evaluatePayment(myElectronicWallet, test.amount);
                 System.out.println(resultMessage);
             } else {
-                boolean accepted = myElectronicWallet.topUp(amounts[i]);
-                String resultMessage = evaluateChange(accepted, "Balance", amounts[i], myElectronicWallet.getBalance());
+                boolean accepted = myElectronicWallet.topUp(test.amount);
+                String resultMessage = evaluateChange(accepted, "Balance", test.amount, myElectronicWallet.getBalance());
                 System.out.println(resultMessage);
             }
         }

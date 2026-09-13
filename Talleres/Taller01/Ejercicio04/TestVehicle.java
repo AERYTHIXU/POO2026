@@ -24,8 +24,8 @@ public class TestVehicle {
         vehicle.brake();
     }
     
-    System.out.println(String.format("Action: %s = Went from %d to %d km/h", 
-    action.toUpperCase(), previousSpeed, vehicle.getCurrentSpeed()));
+    System.out.printf("%nAction: %s = Went from %d to %d km/h", 
+    action.toUpperCase(), previousSpeed, vehicle.getCurrentSpeed());
     }
 
     // Loop to check string values.
@@ -45,7 +45,7 @@ public class TestVehicle {
             boolean accepted;
             Object actual;
             
-            if (speedType.equals("Current")) {
+            if (speedType.equalsIgnoreCase("Current")) {
                 accepted = vehicle.setCurrentSpeed(value);
                 actual = vehicle.getCurrentSpeed();
             } else {
