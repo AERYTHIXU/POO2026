@@ -8,11 +8,9 @@ public class Vehicle {
     
     
     public Vehicle(String brand, String licensePlate, int maximumSpeed) {
-    
-        this.brand = (brand != null && !brand.trim().isEmpty()) ? brand.trim() : "Unknown";
-        this.licensePlate = (licensePlate != null && licensePlate.trim().matches("(?i)^[a-zA-Z]{3}[0-9]{3}$"))
-        ? licensePlate.trim().toUpperCase() : "AAA000";
-        this.maximumSpeed = (maximumSpeed >= 0) ? maximumSpeed : 0;
+        if (!setBrand(brand)) { this.brand = "Unknown"; }
+        if (setLicensePlate(licensePlate) == ValidationResult.REJECTED) {this.licensePlate = "AAA000"; }
+        if (!setMaximumSpeed(maximumSpeed)) { this.maximumSpeed = 0; }
         this.currentSpeed = 0;
     }
 
@@ -39,7 +37,7 @@ public class Vehicle {
             return  ValidationResult.ACCEPTED_WITH_NORMALIZATION;
         }
     }
-
+    
     public boolean setCurrentSpeed(int currentSpeed) {
         if (currentSpeed >= 0 && currentSpeed <= this.maximumSpeed) {
             this.currentSpeed = currentSpeed;

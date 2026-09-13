@@ -7,28 +7,19 @@ public class Product {
     private int stock;
     
     public Product(String name, double price, int stock) {
-        if (name != null && !name.trim().isEmpty()) {
-            this.name = name.trim();
-        } else {
+        if (!setName(name)) {
             this.name = "Unknown"; // Valid default name.
         }
 
-        if (price > 0) {
-            this.price = price;
-        } else {
+        if (!setPrice(price)) {
             this.price = 0; // Valid default price.
         }
 
-        if (stock > 0) {
-            this.stock = stock;
-        } else {
-            this.stock = 0; // Valid default .
+        if (!setStock(stock)) {
+            this.stock = 0; // Valid default stock.
         }
     }
 
-    public String getName() {
-        return name;
-    }
     public boolean setName(String name) {
         if (name != null && !name.trim().isEmpty()) {
             this.name = name;
@@ -37,9 +28,6 @@ public class Product {
         return false;
     }
 
-    public double getPrice() {
-        return price;
-    }
     public boolean setPrice(double price) {
         if (price > 0) {
             this.price = price;
@@ -48,14 +36,21 @@ public class Product {
         return false;
     }
 
-    public int getStock() {
-        return stock;
-    }
     public boolean setStock(int stock) {
         if (stock >= 0) {
             this.stock = stock;
             return true;
         }
         return false;
+    }
+    public String getName() {
+        return name;
+    }
+    public double getPrice() {
+        return price;
+    }
+
+    public int getStock() {
+        return stock;
     }
 }

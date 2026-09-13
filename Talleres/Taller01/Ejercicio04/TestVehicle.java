@@ -1,22 +1,20 @@
 package Talleres.Taller01.Ejercicio04;
 
 public class TestVehicle {
-    private static String validateLicensePlates(Vehicle vehicle, String testLicensePlate) {
-        ValidationResult state = vehicle.setLicensePlate(testLicensePlate);
-        
-        String statusMesagge = switch(state) {
-            case ACCEPTED_WITHOUT_CHANGES -> "Accepted without modifications.";
-            case ACCEPTED_WITH_NORMALIZATION -> "Accepted with modifications.";
-            case REJECTED -> "Rejected (The previus one is retained).";
-        };
-
-        return statusMesagge;
-    }
-
     private static String evaluateChange(boolean accepted, String type, Object value, Object actual ) { 
         return String.format("Assignment of %s to %s = %s. Actual value = %s.", value, type, accepted ? "Accepted" : "Declined", actual);
     }
 
+    private static String evaluateLicensePlates(Vehicle vehicle, String testLicensePlate) {
+        ValidationResult state = vehicle.setLicensePlate(testLicensePlate);
+        
+        String evaluationMesagge = switch(state) {
+            case ACCEPTED_WITHOUT_CHANGES -> "Accepted without modifications.";
+            case ACCEPTED_WITH_NORMALIZATION -> "Accepted with modifications.";
+            case REJECTED -> "Rejected (The previus one is retained).";
+        };
+        return evaluationMesagge;
+    }
     private static void testAction(Vehicle vehicle, String action) {
     int previousSpeed = vehicle.getCurrentSpeed();
     
@@ -31,8 +29,8 @@ public class TestVehicle {
     }
 
     // Loop to check string values.
-    public static void runTest(Vehicle vehicle, String title, String[] values, String stringType) {
-        System.out.println("\n|| BRAND TESTS ||\n");
+    private static void runTest(Vehicle vehicle, String title, String[] values, String stringType) {
+        System.out.println("\n|| " + title + " ||\n");
         for (String brand : values) {
             boolean accepted = vehicle.setBrand(brand);
             String assesment = evaluateChange(accepted, stringType, brand, vehicle.getBrand());
@@ -40,19 +38,19 @@ public class TestVehicle {
         }
     }
     
-    // Loop to check int values.
-    public static void runTest(Vehicle myVehicle, String title, int[] values, String speedType) {
-        System.out.println("\n|| " + title + " ||\n");
+    // Loop to check speed values.
+    private static void runTest(Vehicle vehicle, String title, int[] values, String speedType) {
+        System.out.println("\n|| " + title + " +||\n");
         for (int value : values) {
             boolean accepted;
             Object actual;
             
             if (speedType.equals("Current")) {
-                accepted = myVehicle.setCurrentSpeed(value);
-                actual = myVehicle.getCurrentSpeed();
+                accepted = vehicle.setCurrentSpeed(value);
+                actual = vehicle.getCurrentSpeed();
             } else {
-                accepted = myVehicle.setMaximumSpeed(value);
-                actual = myVehicle.getMaximumSpeed();
+                accepted = vehicle.setMaximumSpeed(value);
+                actual = vehicle.getMaximumSpeed();
             }
             
             String assessment = evaluateChange(accepted, speedType + " Speed", value, actual);
@@ -77,7 +75,7 @@ public class TestVehicle {
         String[] plates = {"abc123", "XYZ789", "invalid", "DEF456", "ASDFAS123"};
         System.out.println("\n||| LICENSE PLATES TEST |||\n");
         for (String plate : plates) {
-            String resultMessage = validateLicensePlates(myVehicle, plate);
+            String resultMessage = evaluateLicensePlates(myVehicle, plate);
             System.out.printf("Trying plate %s = %s Actual plate = %s%n", plate, resultMessage, myVehicle.getLicensePlate());
         }
 

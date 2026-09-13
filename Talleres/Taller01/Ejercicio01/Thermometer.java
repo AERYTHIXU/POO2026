@@ -4,11 +4,8 @@ public class Thermometer {
     private double temperature;
 
     public Thermometer(double initialTemperature) {
-        if (initialTemperature >= -50 && initialTemperature <= 100) {
-            this.temperature = initialTemperature;
-        }
-        else {
-            this.temperature = 0; // Valid default value.
+        if(!setTemperature(initialTemperature)) {
+            this.temperature = 0; // Valid default temperature.
         }
     }
 
