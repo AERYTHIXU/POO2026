@@ -10,7 +10,7 @@ public class Vehicle {
     public Vehicle(String brand, String licensePlate, int maximumSpeed) {
     
         this.brand = (brand != null && !brand.trim().isEmpty()) ? brand.trim() : "Unknown";
-        this.licensePlate = (licensePlate != null && licensePlate.trim().matches("(?i)[a-zA-Z]{3}[0-9]{3}"))
+        this.licensePlate = (licensePlate != null && licensePlate.trim().matches("((?i)^[a-zA-Z]{3}[0-9]{3}$"))
         ? licensePlate.trim().toUpperCase() : "AAA000";
         this.maximumSpeed = (maximumSpeed >= 0) ? maximumSpeed : 0;
         this.currentSpeed = 0;
@@ -18,14 +18,14 @@ public class Vehicle {
 
     public boolean setBrand(String brand) {
         if (brand != null && !brand.trim().isEmpty()) {
-            this.brand = brand;
+            this.brand = brand.trim();
             return true;
         }
         return false;
     }
     
     public ValidationResult setLicensePlate(String licensePlate) {
-        if (licensePlate == null || !licensePlate.trim().matches("(?i)^[a-zA-Z]{3}[0-9]{3}")) {
+        if (licensePlate == null || !licensePlate.trim().matches("(?i)^[a-zA-Z]{3}[0-9]{3}$")) {
             return ValidationResult.REJECTED;
         }
 
@@ -41,7 +41,7 @@ public class Vehicle {
     }
 
     public boolean setCurrentSpeed(int currentSpeed) {
-        if (currentSpeed >= 0 && currentSpeed < this.maximumSpeed) {
+        if (currentSpeed >= 0 && currentSpeed <= this.maximumSpeed) {
             this.currentSpeed = currentSpeed;
             return true;
         }
