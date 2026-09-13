@@ -40,8 +40,8 @@ public class Vehicle {
         }
     }
 
-    public boolean setCurrentSpeed(int currentSpeed, int maximumSpeed) {
-        if (currentSpeed >= 0 && currentSpeed < maximumSpeed) {
+    public boolean setCurrentSpeed(int currentSpeed) {
+        if (currentSpeed >= 0 && currentSpeed < this.maximumSpeed) {
             this.currentSpeed = currentSpeed;
             return true;
         }
@@ -57,7 +57,7 @@ public class Vehicle {
     }
 
     public void accelerate() {
-        if (this.currentSpeed <= this.maximumSpeed) {
+        if (this.currentSpeed + 10 <= this.maximumSpeed) {
             this.currentSpeed += 10;
         } else {
             this.currentSpeed = maximumSpeed;

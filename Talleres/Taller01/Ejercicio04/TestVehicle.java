@@ -47,7 +47,7 @@ public class TestVehicle {
         System.out.println("\n|| CURRENT SPEED TESTS ||\n");
         int[] currentSpeeds = {-10, 20, 150, 210, 34, 22};
         for (int speed : currentSpeeds) {
-            boolean accepted = myVehicle.setCurrentSpeed(speed, myVehicle.getMaximumSpeed());
+            boolean accepted = myVehicle.setCurrentSpeed(speed);
             String assesment = evaluateChange(accepted, "Current Speed", speed, myVehicle.getCurrentSpeed());
             System.out.println(assesment);
         }
@@ -71,7 +71,7 @@ public class TestVehicle {
             plate, resultMessage, myVehicle.getLicensePlate()));
         }
 
-        myVehicle.setCurrentSpeed(0, myVehicle.getMaximumSpeed());
+        myVehicle.setCurrentSpeed(0);
         System.out.println("\n|| ACTION TESTS ||\n");
         String[] actions = {"accelerate", "accelerate", "accelerate", "brake", "brake", "brake"};
 
