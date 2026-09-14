@@ -7,7 +7,7 @@ public class TestElectronicWallet {
         PaymentStatus status = electronicWallet.payment(amount);
         String evaluationMessage = switch(status) {
             case ACCEPTED -> String.format("Payment of %d accepted. Actual balance = %d", amount, electronicWallet.getBalance());
-            case INSUFFICIENT_FOUNDS -> String.format("Payment of %d rejected. (Insuficient founds.)", amount);
+            case INSUFFICIENT_FUNDS -> String.format("Payment of %d rejected. (Insuficient founds.)", amount);
             case AMOUNT_TOO_LARGE -> String.format("Payment %d rejected. (amount exceeding 500000)", amount);
             case INVALID_AMOUNT -> String.format("Payment of %d rejected. (Amount less than or equal to 0)", amount);
         };

@@ -11,7 +11,7 @@ public class ElectronicWallet {
 
     public boolean setOwner(String owner) {
         if (owner != null && !owner.trim().isEmpty()) {
-            this.owner = owner;
+            this.owner = owner.trim();
             return true;
         }
         return false;
@@ -28,7 +28,7 @@ public class ElectronicWallet {
     public PaymentStatus payment(int amount) {
         if (amount <= 0) { return PaymentStatus.INVALID_AMOUNT; }
         else if (amount > 500000) { return PaymentStatus.AMOUNT_TOO_LARGE; }
-        else if (amount > this.balance) { return PaymentStatus.INSUFFICIENT_FOUNDS; }
+        else if (amount > this.balance) { return PaymentStatus.INSUFFICIENT_FUNDS; }
         else {
             this.balance -= amount;
         }
