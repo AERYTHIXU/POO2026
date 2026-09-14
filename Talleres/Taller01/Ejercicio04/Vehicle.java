@@ -47,7 +47,7 @@ public class Vehicle {
     }
 
     public boolean setMaximumSpeed(int maximumSpeed) {
-        if (maximumSpeed > 0) {
+        if (maximumSpeed > 0 && maximumSpeed >= this.currentSpeed) {
             this.maximumSpeed = maximumSpeed;
             return true;
         }
