@@ -5,7 +5,7 @@ public class ElectronicWallet {
     private int balance;
 
     public ElectronicWallet(String owner) {
-        if (!setOwner(owner)); { this.owner = "Unkwown"; }
+        if (!setOwner(owner)) { this.owner = "Unkwown"; }
         this.balance = 0;
     }
 
